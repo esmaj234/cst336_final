@@ -1,3 +1,17 @@
 <%- include('partials/header.ejs') %>
-    <h1>Hello World!</h1>
+  <h1>Mercury Store</h1>
+  <br />
+  <br />
+  <form action="/search">
+    <input type="text" name="search">
+    <button name="productSearch"> Search Products</button>
+  </form>
+  <br />
+  <br />
+
+  <form action="/checkout">
+    <button> Checkout Now!</button>
+  </form>
+  
+  
 <%- include('partials/footer') %>
