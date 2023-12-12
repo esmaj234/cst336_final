@@ -1,20 +1,91 @@
-<!-- index.ejs -->
-<%- include('partials/header.ejs') %>
-  <br />
-  <br />
-  <form action="/cart">
-    <button>View Cart</button>
-  </form>
-  <form action="/search">
-    <input type="text" name="search">
-    <button name="productSearch"> Search Products</button>
-  </form>
-  <br />
-  <br />
+//index.js
+const express = require("express");
+const app = express();
+const fetch = require("node-fetch");
+const pool = require("./dbPool.js"); // LC: link to database
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 
-  <form action="/checkout">
-    <button> Checkout Now!</button>
-  </form>
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
+app.get("/checkout", async (req, res) => {
+  let sql = "SELECT * FROM cart";
+  let rows = await executeSQL(sql);
+  res.render("checkout", { items: rows });
+});
 
-<%- include('partials/footer') %>
+app.get("/confirm", (req, res) => {
+  res.render("ship", { city: "", state: "" });
+});
+
+// Function to get state and city from zip
+app.get("/getShipInfo", async (req, res) => {
+  let zip = req.query.zip;
+  let url = `https://csumb.space/api/cityInfoAPI.php?zip=${zip}`;
+  let response = await fetch(url);
+  let data = await response.json();
+  console.log(data.city);
+  console.log(data.state);
+  res.render("ship", { city: data.city, state: data.state });
+});
+
+app.get("/search", async (req, res) => {
+  try {
+    const searchTerm = req.query.search;
+
+    // Modify the SQL query based on your search criteria
+    let sql;
+    if (searchTerm) {
+      sql = `SELECT * FROM product WHERE productname LIKE '%${searchTerm}%'`;
+    } else {
+      sql = 'SELECT * FROM product';
+    }
+
+    // Execute the SQL query
+    let rows = await executeSQL(sql);
+
+    // Render the search results page
+    res.render("search", { results: rows, searchTerm });
+  } catch (error) {
+    console.error("Error during search:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get("/cart", async (req, res) => {
+  try {
+    // Retrieve user's cart items from the database or other source
+    // For now, let's assume you have an executeSQL function similar to what you used before
+
+    let sql = "SELECT * FROM cart JOIN product ON cart.productid = product.productid";
+    let items = await executeSQL(sql);
+
+    res.render("cart", { items });
+  } catch (error) {
+    console.error("Error loading user's cart:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.listen(3000, () => {
+  console.log("server started");
+});
+
+// LC: Database Test (see dbPool.js for other table names)
+app.get("/dbTest", async function (req, res) {
+  let sql = "SELECT * FROM product";
+  let rows = await executeSQL(sql);
+  res.send(rows);
+});
+
+// LC: Function to execute SQL
+async function executeSQL(sql, params) {
+  return new Promise(function (resolve, reject) {
+    pool.query(sql, params, function (err, rows, fields) {
+      if (err) throw err;
+      resolve(rows);
+    });
+  });
+}
