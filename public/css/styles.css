@@ -1,0 +1,48 @@
+body {
+  background-color: #979976;
+  text-align: center;
+  }
+
+h1 {
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+}
+
+hr {
+  height: 3px;
+  background-color: black;
+  border: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a {
+  color: black;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  margin-top: 10px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+img {
+  width: 400px;
+  height: 300px;
+}
