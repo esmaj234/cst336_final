@@ -57,7 +57,6 @@ app.get("/search", async (req, res) => {
 app.get("/cart", async (req, res) => {
   try {
     // Retrieve user's cart items from the database or other source
-    // For now, let's assume you have an executeSQL function similar to what you used before
 
     let sql = "SELECT * FROM cart JOIN product ON cart.productid = product.productid";
     let items = await executeSQL(sql);
@@ -73,14 +72,14 @@ app.listen(3000, () => {
   console.log("server started");
 });
 
-// LC: Database Test (see dbPool.js for other table names)
+
 app.get("/dbTest", async function (req, res) {
   let sql = "SELECT * FROM product";
   let rows = await executeSQL(sql);
   res.send(rows);
 });
 
-// LC: Function to execute SQL
+
 async function executeSQL(sql, params) {
   return new Promise(function (resolve, reject) {
     pool.query(sql, params, function (err, rows, fields) {
