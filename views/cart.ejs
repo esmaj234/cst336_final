@@ -1,0 +1,30 @@
+<!-- cart.ejs -->
+<%- include('partials/header.ejs') %>
+  <h1>User's Shopping Cart</h1>
+
+  <% if (items.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item => { %>
+          <tr>
+            <td><%= item.productname %></td>
+            <td><%= item.quantity %></td>
+            <td><%= item.subtotal %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>Your cart is empty.</p>
+  <% } %>
+
+  <a href="/checkout">Proceed to Checkout</a>
+
+<%- include('partials/footer') %>
