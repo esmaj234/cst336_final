@@ -1,17 +1,39 @@
-<%- include('partials/header.ejs') %>
+  <%- include('partials/header.ejs') %>
+  <br>
   <h1>Mercury Store</h1>
+  <hr>
   <br />
-  <br />
-  <form action="/search">
-    <input type="text" name="search">
-    <button name="productSearch"> Search Products</button>
-  </form>
-  <br />
-  <br />
+  <body>
 
+    <div class="container">
+    <nav>
+    <a href="tops.ejs">Tops</a>
+    <a href="bottoms.ejs">Bottoms</a>
+    <a href="shoes.ejs">Shoes</a>
+    <a href="accessories.ejs">Accessories</a>
+    </nav>
+    <br>
+
+      <form action="/search">
+        <input type="text" name="search">
+        <button name="productSearch"> Search Products</button>
+      </form>
+
+      <br>
+      
+      <div class="animated-images">
+        <img id="topsImage" src="/img/tops.jpg" alt="Tops Image">
+        <img id="bottomsImage" src="/img/bottoms.jpg" alt="Bottoms Image">
+        <img id="shoesImage" src="/img/shoes.jpg" alt="Shoes Image">
+        <img id="accessoriesImage" src="/img/accessories.jpg.webp" alt="Accessories Image">
+      </div>
+
+      
+ 
   <form action="/checkout">
-    <button> Checkout Now!</button>
+    <button> Checkout Now!</button><br>
   </form>
-  
-  
+    </div>
+   </body>
+
 <%- include('partials/footer') %>
