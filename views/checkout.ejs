@@ -1,11 +1,14 @@
+<!-- checkout.ejs -->
 <%- include('partials/header.ejs') %>
-  <h1>Mercury Store</h1>
   <br />
-  <h2>Need code for items in shopping cart and add fake data to db to view</h2>
-  <h4>Items in Your Cart:</h4>
+  <h2>Items in Your Cart:</h2>
 
   <% for (item of items) { %>
-    <%=item.cartId%>
+    <div>
+      <p>Product: <%= item.productid %></p>
+      <p>Quantity: <%= item.quantity %></p>
+      <p>Subtotal: <%= item.subtotal %></p>
+    </div>
   <% } %>
 
   <form action="/confirm">
