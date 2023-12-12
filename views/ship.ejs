@@ -1,0 +1,31 @@
+<%- include('partials/header.ejs') %>
+  <h1>Mercury Store</h1>
+  <br />
+  <h2>Need code for items in shopping cart and add fake data to db to view</h2>
+  <h4>Items in Your Cart:</h4>
+
+  Street Address:
+  <br>
+  <input type="text" name="address">
+  <br />
+  
+  Enter your zip and we'll help fill more:
+  <br>
+  
+  <form action="/getShipInfo" method="get">
+    <input id="zip" name="zip" type="text">
+    <button type="submit">Help Me Fill Info!</button>
+  </form>
+  <br />
+  
+  City:
+  <br>
+  <span id="city" name="city"><%= city %></span>
+  <br />
+  
+  State:
+  <br>
+  <span id="state" name="state"><%= state %></span>
+
+  <br />
+<%- include('partials/footer') %>

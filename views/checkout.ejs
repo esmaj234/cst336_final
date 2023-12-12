@@ -1,0 +1,14 @@
+<%- include('partials/header.ejs') %>
+  <h1>Mercury Store</h1>
+  <br />
+  <h2>Need code for items in shopping cart and add fake data to db to view</h2>
+  <h4>Items in Your Cart:</h4>
+
+  <% for (item of items) { %>
+    <%=item.cartId%>
+  <% } %>
+
+  <form action="/confirm">
+    <button>Confirm Checkout</button>
+  </form>
+<%- include('partials/footer') %>
