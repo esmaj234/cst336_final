@@ -9,6 +9,11 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/search", async (req, res) => {
+  // Erin to do: Need to add image rendering API call here
+  let sql = `SELECT * FROM product WHERE productname LIKE ?`;
+});
+
 app.get("/checkout", async (req, res) => {
   let sql = "SELECT * FROM cart";
   let rows = await executeSQL(sql);
@@ -19,14 +24,12 @@ app.get("/confirm", (req, res) => {
   res.render("ship", { city: "", state: "" });
 });
 
-// Function to get state and city from zip
+// API call to get state and city from zip
 app.get("/getShipInfo", async (req, res) => {
   let zip = req.query.zip;
   let url = `https://csumb.space/api/cityInfoAPI.php?zip=${zip}`;
   let response = await fetch(url);
   let data = await response.json();
-  console.log(data.city);
-  console.log(data.state);
   res.render("ship", { city: data.city, state: data.state });
 });
 
