@@ -1,7 +1,10 @@
+<!-- index.ejs -->
 <%- include('partials/header.ejs') %>
-  <h1>Mercury Store</h1>
   <br />
   <br />
+  <form action="/cart">
+    <button>View Cart</button>
+  </form>
   <form action="/search">
     <input type="text" name="search">
     <button name="productSearch"> Search Products</button>
@@ -12,6 +15,6 @@
   <form action="/checkout">
     <button> Checkout Now!</button>
   </form>
-  
-  
+
+  <script src="/js/script.js"></script>
 <%- include('partials/footer') %>
